@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.vessel {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #c2e7c9, #4265d6);
+  padding: 10px;
+}
+
+.todo-app {
+  width: 100%;
+  max-width: 540px;
+  background: #fff;
+  margin: 100px auto 20px;
+  /* padding: top, right/left, bottom */
+  padding: 40px 30px 70px;
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in-out; /* Fade-in animation for todo-app */
+}
+
+.todo-app h2 {
+  color: #002765;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todo-app h2 img {
+  width: 30px;
+  margin-left: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #edeef0;
+  border-radius: 30px;
+  padding-left: 20px;
+  margin-bottom: 25px;
+}
+
+input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 16px 50px;
+  background: #FF4500; /* Fallback color */
+  background: linear-gradient(to right, #FF4500, #FFA500);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 40px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Button hover animation */
+}
+
+.btn:hover {
+  transform: scale(1.05); /* Slight scale-up on hover */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+ul li {
+  list-style: none;
+  font-size: 17px;
+  /* padding: top, right, bottom, left */
+  padding: 17px 8px 12px 50px;
+  cursor: pointer;
+  position: relative;
+  animation: slideIn 0.3s ease-out; /* Slide-in animation for new tasks */
+  transition: transform 0.2s ease; /* Smooth hover transition */
+}
+
+ul li:hover {
+  transform: scale(1.02); /* Subtle scale-up on hover */
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-image: url('./images/unchecked.png');
+  background-size: cover;
+  background-position: center;
+  top: 11px;
+  left: 8px;
+  transition: background-image 0.2s ease; /* Smooth checkbox transition */
+}
+
+ul li.checked {
+  color: #555;
+  text-decoration: line-through;
+}
+
+ul li.checked::before {
+  background-image: url('./images/checked.png');
+}
+
+ul li span {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  color: #555;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+ul li span:hover {
+  background: #edeef0;
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+/* Apply slide-out animation for removed items (requires JavaScript modification) */
+ul li.remove {
+  animation: slideOut 0.3s ease-out forwards;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 750px) {
+  .todo-app {
+    max-width: 90%;
+    margin: 80px auto 20px;
+    padding: 30px 25px 50px;
+    animation: fadeIn 0.5s ease-in-out; /* Retain animation */
+  }
+
+  .btn {
+    padding: 12px 40px;
+    font-size: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  ul li {
+    font-size: 16px;
+    padding: 15px 8px 10px 40px;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  ul li::before {
+    height: 24px;
+    width: 24px;
+    top: 10px;
+    left: 6px;
+    transition: background-image 0.2s ease;
+  }
+
+  ul li span {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    line-height: 36px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .todo-app {
+    position: relative;
+    top: 60px;
+    margin: 60px auto 15px;
+    padding: 25px 20px 40px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .row {
+    padding-left: 15px;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    padding: 10px 30px;
+    font-size: 13px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  ul li {
+    font-size: 15px;
+    padding: 14px 8px 10px 35px;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  ul li::before {
+    height: 22px;
+    width: 22px;
+    top: 9px;
+    left: 5px;
+    transition: background-image 0.2s ease;
+  }
+
+  ul li span {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .todo-app h2 img {
+    width: 25px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .todo-app {
+    margin: 40px auto 10px;
+    padding: 20px 15px 30px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .todo-app h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+  }
+
+  input {
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 12px;
+    border-radius: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  ul li {
+    font-size: 14px;
+    padding: 12px 8px 8px 30px;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  ul li::before {
+    height: 20px;
+    width: 20px;
+    top: 8px;
+    left: 4px;
+    transition: background-image 0.2s ease;
+  }
+
+  ul li span {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .todo-app h2 img {
+    width: 20px;
+  }
+}
+  </style>
+  <title>To Do List</title>
+</head>
+<body>
+  <div class="vessel">
+    <div class="todo-app">
+      <h2>To-Do List <img src="./images/sticky-note.png" alt="Sticky note icon" /></h2>
+      <div class="row">
+        <input type="text" id="input-box" placeholder="Add a new task" value="" />
+        <button onclick="addTask()" class="btn" type="button">Add</button>
+      </div>
+      <ul id="list-vessel"></ul>
+    </div>
+  </div>
+
+  <script src="todolist.js"></script>
+</body>
+</html>
