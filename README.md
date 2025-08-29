@@ -13,6 +13,14 @@
   - 🖌️Easy to set up and.
   - 🛠️Tech Stack.
 
-- Front-End: HTML, CSS, JavaScript
-- Storage: Browser localStorage
-- Tools: Mobile code editor (e.g., AIDE, Replit), GitHub (
+### Front-End: 
+
+ - HTML, CSS, JavaScript
+  
+### Storage: 
+
+ - Browser localStorage
+   
+### Tools:
+
+ - Mobile code editor {Speck editor, Termux, GitHub}
